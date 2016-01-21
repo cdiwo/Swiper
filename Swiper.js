@@ -16,25 +16,25 @@
         
         var defaults = {
             direction: 'horizental', // 方向
-            speed: 300,// Css3 transition duration
             autoplay: false,// autoplay
+            speed: 300,// Css3 animation duration
             easing: 'ease',// Css3 animation timing function
             inertia: true,// 开启惯性滑动
-            touchThreshold: 0.2,// 拖拽占比率，默认元素的1/5
+            touchRatio: 0.2,// 拖拽占比率，默认元素的1/5
             index: 0,// 初始下标
             wrapperClass: '.swiper-wrapper',
-            itemClass: '.swiper-item',
+            slideClass: '.swiper-slide',
             debug: false,
             /*
             Callbacks:
             onInit: function()
+            onSwipeLeft: function()
+            onSwipeRight: function()
+            onEdgeLeft: function()
+            onEdgeRight: function()
             onSlideMove: function (e)
             onSlideEnd: function(index)
             onSlideChanged: function(index)
-            onEdgeLeft: function()
-            onEdgeRight: function()
-            onSwipeLeft: function()
-            onSwipeRight: function()
             */
         }
 
@@ -54,7 +54,7 @@
         if(container === undefined) throw new Error('Invalid container!');
         s.container =  container === window ? $(window) : $(container);
         s.wrapper = s.container.find(s.params.wrapperClass);
-        s.slide = s.container.find(s.params.itemClass);
+        s.slide = s.container.find(s.params.slideClass);
 
         // Is horizental
         function isH() {
@@ -77,6 +77,9 @@
 
         // Slide Vars
         s.slideWidth, s.slideCount;//元素宽度px和个数
+
+        // Autoplay paused
+        s.autoplayPaused = false;
 
         /*=========================
         Slide progress
@@ -220,6 +223,7 @@
             s.touchObject.startTime = (new Date()).getTime();
 
             s.dragging = true;
+            s.autoplayPaused = true;
         };
         s.swipeMove = function(event) {
             var direction, swipeLength;
@@ -274,6 +278,7 @@
         s.swipeEnd = function(event) {
             var direction = s.swipeDirection();
             s.shouldClick = (s.touchObject.swipeLength > 10) ? false : true;
+            s.autoplayPaused = false;
 
             if (!s.dragging || s.touchObject.curX === undefined) {
                 return false;
@@ -348,7 +353,7 @@
             s.touchObject.fingerCount = event.originalEvent && event.originalEvent.touches !== undefined ?
                 event.originalEvent.touches.length : 1;
 
-            s.touchObject.minSwipe = s.slideWidth * s.params.touchThreshold;
+            s.touchObject.minSwipe = s.slideWidth * s.params.touchRatio;
 
             switch (event.type) {
                 case 'touchstart':
@@ -382,6 +387,14 @@
 
             //设置CSS Transform属性
             s.setProps();
+
+            if(s.params.autoplay) {
+                s.autoplayInteral = setInterval(function() {
+                    if(!s.autoplayPaused) {
+                        s.next();
+                    }
+                }, s.params.autoplay);
+            }
         };
 
         // 初始化
