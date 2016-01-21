@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swiper</title>
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="swiper.js"></script>
+    <script>
+    $(function(){
+         window.swiper = new Swiper('.swiper-container', {
+            onSlideChanged: function(index) {
+                console.log('SlideChanged! Now change index to ' + index);
+            }
+         });
+         // window.swiper.on('slideChanged', function(index) {
+         //    console.log('SlideChanged! Now change index to ' + index);
+         // });
+    })
+    </script>
+    <style type="text/css">    
+
+    /** 默认样式 */
+    .swiper-container {
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .swiper-wrapper { 
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+
+        -webkit-transition-property: -webkit-transform;
+        -moz-transition-property: -moz-transform;
+        -o-transition-property: -o-transform;
+        -ms-transition-property: -ms-transform;
+
+        transition-property: transform;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+
+    .swiper-container-vertical > .swiper-wrapper {
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+    
+    .swiper-item  {
+        -webkit-flex-shrink: 0;
+        -ms-flex: 0 0 auto;
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    /** 自定义样式 */
+    ul { margin: 0; padding: 0;}
+    .swiper {
+        
+        color: white;
+    }
+    .angle {
+        position: absolute;
+        left: 71px;
+        top: 0px;
+        width: 0px;
+        height:0px;
+        border-color: white;
+        line-height: 0px;
+        border-width: 30px 30px 0;
+        border-style: solid dashed dashed dashed;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        z-index: 999;
+    }
+    .swiper-item {
+        list-style: none;
+        background-color: #00cc77;
+    }
+
+    .swiper-item vl {
+        float: left;
+        height: 100px;
+        width: 10px;
+        margin-left: 50%;
+        border-left: 2px solid white;
+    }
+    .swiper-item span {
+        float: left;
+        height: 100px;
+        width: 100%;
+        line-height: 150px;
+        font-size: 64px;
+        text-align: center;
+    }
+    .swiper-item .week {
+        float: left;
+        height: 50px;
+        width: 100%;
+        line-height: 50px;
+        font-size: 24px;
+        text-align: center;
+    }
+    .prev, .next{ width: 150px; height: 35px; }
+    
+    </style>
+</head>
+<body>
+
+    <div class="swiper-container swiper">
+        <div class="angle"></div>
+        <ul class="swiper-wrapper">
+            <li class="swiper-item"><vl></vl><span>1</span><span class="week">三</span></li>
+            <li class="swiper-item"><vl></vl><span>2</span><span class="week">四</span></li>
+            <li class="swiper-item"><vl></vl><span>3</span><span class="week">五</span></li>
+            <li class="swiper-item"><vl></vl><span>4</span><span class="week">六</span></li>
+            <li class="swiper-item"><vl></vl><span>5</span><span class="week">日</span></li>
+            <li class="swiper-item"><vl></vl><span>6</span><span class="week">一</span></li>
+            <li class="swiper-item"><vl></vl><span>7</span><span class="week">二</span></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;">
+        <button onclick="swiper.prev()" class="prev">上一个</button>
+        <button onclick="swiper.next()" class="next">下一个</button>
+    </div>
+
+</body>
+</html>
