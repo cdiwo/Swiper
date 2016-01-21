@@ -58,7 +58,7 @@
         flex-direction: column;
     }
     
-    .swiper-item  {
+    .swiper-slide  {
         -webkit-flex-shrink: 0;
         -ms-flex: 0 0 auto;
         flex-shrink: 0;
@@ -70,10 +70,10 @@
     /** 自定义样式 */
     .swiper { width: 200px; color: white; }
     
-    .swiper-item { height: 300px; }
-    .swiper-item:nth-child(1) { background-color: #0C7; }
-    .swiper-item:nth-child(2) { background-color: #FC3; }
-    .swiper-item:nth-child(3) { background-color: #369; }
+    .swiper-slide { height: 300px; }
+    .swiper-slide:nth-child(1) { background-color: #0C7; }
+    .swiper-slide:nth-child(2) { background-color: #FC3; }
+    .swiper-slide:nth-child(3) { background-color: #369; }
 
     .prev, .next{ width: 150px; height: 35px; }
     
@@ -81,12 +81,11 @@
 </head>
 <body>
 
-    <div class="swiper-container swiper">
-        <div class="angle"></div>
+    <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-item"></div>
-            <div class="swiper-item"></div>
-            <div class="swiper-item"></div>
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
         </div>
     </div>
 
