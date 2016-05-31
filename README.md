@@ -7,12 +7,12 @@
 
 CommonJS 方式引用
 ```js
-var Swiper = require('swiper.js');
+var Swiper = require('swiper');
 ```
 
 AMD 方式引用
 ```js
-define(['./swiper'], function(Dropup) {
+define(['swiper'], function(Swiper) {
     // ...
 });
 ```
@@ -45,16 +45,12 @@ new Swiper(container, params);
 ```
 Example：
 ```js
-window.swiper = new Swiper('.swiper-container', {
+var swiper = new Swiper('.swiper-container', {
     // 参数化事件处理
     onSlideChanged: function(index) {
         console.log('SlideChanged! Now change index to ' + index);
     }
 });
-// 外部绑定事件处理
-// window.swiper.on('slideChanged', function(index) {
-//    console.log('SlideChanged! Now change index to ' + index);
-// });
 ```
 
 ## 参数说明
@@ -196,3 +192,12 @@ window.swiper = new Swiper('.swiper-container', {
 </tbody>
 </table>
 
+### 更新日志
+### 1.1.0 - 2016/05/31
+1. 新增垂直方向模式
+
+### 1.0.1 - 2015/03/23
+1. 支持惯性滑动
+
+### 1.0.0 - 2015/03/17
+1. 支持水平方向的滑动组件
